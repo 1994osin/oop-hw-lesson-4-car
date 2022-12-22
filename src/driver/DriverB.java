@@ -1,11 +1,10 @@
 package driver;
 
-import transport.Car;
 import transport.PassengerCar;
 
 public class DriverB extends Driver<PassengerCar> {
 
-    public DriverB(String fullName, boolean driversLicense, int seniority) {
+    public DriverB(String fullName, boolean driversLicense, int seniority) throws Exception {
         super(fullName, driversLicense, seniority);
     }
 

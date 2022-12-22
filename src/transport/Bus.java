@@ -70,6 +70,12 @@ public class Bus extends Car implements Competing {
         }
     }
 
+    @Override
+    public boolean service() {
+        System.out.println("Автобус " + getBrand() + " " + getModel() + " не нуждается в диагностике");
+        return true;
+    }
+
     public Capacity getCapacity() {
         return capacity;
     }

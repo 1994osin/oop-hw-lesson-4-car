@@ -17,6 +17,8 @@ public abstract class Car {
 
     public abstract void printType();
 
+    public abstract boolean service();
+
     public String getBrand() {
         return brand;
     }

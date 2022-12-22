@@ -4,7 +4,7 @@ import transport.Bus;
 
 public class DriverD extends Driver<Bus> {
 
-    public DriverD(String fullName, boolean driversLicense, int seniority) {
+    public DriverD(String fullName, boolean driversLicense, int seniority) throws Exception {
         super(fullName, driversLicense, seniority);
     }
 

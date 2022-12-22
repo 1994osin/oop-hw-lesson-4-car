@@ -26,10 +26,12 @@ public class PassengerCar extends Car implements Competing {
     }
 
     private BodyType bodyType;
+    public static int countPassengerCar;
 
     public PassengerCar(String brand, String model, double engineVolume, BodyType bodyType) {
         super(brand, model, engineVolume);
         this.bodyType = bodyType;
+        countPassengerCar++;
     }
 
     @Override
@@ -66,11 +68,20 @@ public class PassengerCar extends Car implements Competing {
         }
     }
 
+    @Override
+    public boolean service() {
+        return Math.random() > 0.7;
+    }
+
     public BodyType getBodyType() {
         return bodyType;
     }
 
     public void setBodyType(BodyType bodyType) {
         this.bodyType = bodyType;
+    }
+
+    public static int getCountPassengerCar() {
+        return countPassengerCar;
     }
 }

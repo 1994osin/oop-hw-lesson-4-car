@@ -8,9 +8,9 @@ public abstract class Driver<D extends Car> {
     private boolean driversLicense;
     private int seniority;
 
-    public Driver(String fullName, boolean driversLicense, int seniority) {
+    public Driver(String fullName, boolean driversLicense, int seniority) throws Exception {
         setFullName(fullName);
-        this.driversLicense = driversLicense;
+        setDriversLicense(driversLicense);
         this.seniority = seniority;
     }
 
@@ -32,8 +32,13 @@ public abstract class Driver<D extends Car> {
         return driversLicense;
     }
 
-    public void setDriversLicense(boolean driversLicense) {
-        this.driversLicense = driversLicense;
+    public void setDriversLicense(boolean driversLicense) throws Exception {
+        if (driversLicense) {
+            this.driversLicense = true;
+        } else {
+            throw new Exception("Необходимо указать наличие прав!");
+        }
+
     }
 
     public int getSeniority() {

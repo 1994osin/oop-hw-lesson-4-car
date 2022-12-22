@@ -36,10 +36,12 @@ public class Truck extends Car implements Competing {
     }
 
     LoadCapacity loadCapacity;
+    public static int countTruck;
 
     public Truck(String brand, String model, double engineVolume, LoadCapacity loadCapacity) {
         super(brand, model, engineVolume);
         this.loadCapacity = loadCapacity;
+        countTruck++;
     }
 
     @Override
@@ -76,11 +78,20 @@ public class Truck extends Car implements Competing {
         }
     }
 
+    @Override
+    public boolean service() {
+        return Math.random() > 0.75;
+    }
+
     public LoadCapacity getLoadCapacity() {
         return loadCapacity;
     }
 
     public void setLoadCapacity(LoadCapacity loadCapacity) {
         this.loadCapacity = loadCapacity;
+    }
+
+    public static int getCountTruck() {
+        return countTruck;
     }
 }

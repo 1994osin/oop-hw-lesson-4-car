@@ -4,7 +4,7 @@ import driver.DriverD;
 import transport.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         PassengerCar car1 = new PassengerCar("car1", "c1", 2.0, PassengerCar.BodyType.SEDAN);
         PassengerCar car2 = new PassengerCar("car2", "c2", 2.2, null);
@@ -37,19 +37,36 @@ public class Main {
 //        driverD.stopMoving(bus4);
 //        driverD.tuckIn(bus4);
 
-        car1.printType();
-        car2.printType();
-        car3.printType();
-        car4.printType();
+//        car1.printType();
+//        car2.printType();
+//        car3.printType();
+//        car4.printType();
 
-        truck1.printType();
-        truck2.printType();
-        truck3.printType();
-        truck4.printType();
+//        truck1.printType();
+//        truck2.printType();
+//        truck3.printType();
+//        truck4.printType();
 
-        bus1.printType();
-        bus2.printType();
-        bus3.printType();
-        bus4.printType();
+//        bus1.printType();
+//        bus2.printType();
+//        bus3.printType();
+//        bus4.printType();
+
+        service(car1, car2, car3, car4, truck1, truck2, truck3, truck4, bus1, bus2, bus3, bus4);
+    }
+
+    private static void service(Car... cars) {
+        for (Car car : cars) {
+            serviceTransport(car);
+        }
+    }
+
+    private static void serviceTransport(Car car) {
+        try {
+            if (!car.service())
+                throw new Exception("Автомобиль " + car.getBrand() + " " + car.getModel() + " не прошел диагностику!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
