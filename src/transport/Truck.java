@@ -83,6 +83,11 @@ public class Truck extends Car implements Competing {
         return Math.random() > 0.75;
     }
 
+    @Override
+    public void repair() {
+        System.out.println("Грузовик " + getBrand() + " " + getModel() + " починен");
+    }
+
     public LoadCapacity getLoadCapacity() {
         return loadCapacity;
     }

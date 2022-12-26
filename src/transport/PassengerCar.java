@@ -73,6 +73,11 @@ public class PassengerCar extends Car implements Competing {
         return Math.random() > 0.7;
     }
 
+    @Override
+    public void repair() {
+        System.out.println("Машина " + getBrand() + " " + getModel() + " починена");
+    }
+
     public BodyType getBodyType() {
         return bodyType;
     }

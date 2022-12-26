@@ -1,58 +1,67 @@
-import driver.DriverB;
-import driver.DriverC;
-import driver.DriverD;
+import transport.driver.Driver;
+import transport.driver.DriverB;
+import transport.driver.DriverD;
+import transport.Sponsor;
 import transport.*;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws Exception {
 
+        Mechanic<Car> petr = new Mechanic<>("Петр", "Петров", "comp1");
+        Mechanic<Car> roman = new Mechanic<>("Роман", "Романов", "comp2");
+        Mechanic<Car> andrey = new Mechanic<>("Андрей", "Андреев", "comp2");
+        Sponsor sponsor1 = new Sponsor("sponsor1", 10000);
+        Sponsor sponsor2 = new Sponsor("sponsor1", 20000);
+
         PassengerCar car1 = new PassengerCar("car1", "c1", 2.0, PassengerCar.BodyType.SEDAN);
-        PassengerCar car2 = new PassengerCar("car2", "c2", 2.2, null);
-        PassengerCar car3 = new PassengerCar("car3", "c3", 2.4, PassengerCar.BodyType.SUV);
-        PassengerCar car4 = new PassengerCar("car4", "c4", 2.6, PassengerCar.BodyType.HATCHBACK);
+        car1.addDriver(new DriverB("Иванов И.И.", true, 5));
+        car1.addMechanics(petr);
+        car1.addSponsor(sponsor1, sponsor2);
+
 
         Truck truck1 = new Truck("truck1", "t1", 5.0, Truck.LoadCapacity.NUMBER1);
-        Truck truck2 = new Truck("truck2", "t2", 5.2, Truck.LoadCapacity.NUMBER2);
-        Truck truck3 = new Truck("truck3", "t3", 5.4, Truck.LoadCapacity.NUMBER3);
-        Truck truck4 = new Truck("truck4", "t4", 5.6, Truck.LoadCapacity.NUMBER1);
+        truck1.addDriver(new DriverB("Петров П.П.", true, 10));
+        truck1.addMechanics(roman);
+        truck1.addSponsor(sponsor2);
 
         Bus bus1 = new Bus("bus1", "b1", 3.0, Bus.Capacity.BIG);
-        Bus bus2 = new Bus("bus2", "b2", 3.2, Bus.Capacity.VERY_BIG);
-        Bus bus3 = new Bus("bus3", "b3", 3.4, Bus.Capacity.SMALL);
-        Bus bus4 = new Bus("bus4", "b4", 3.6, null);
+        bus1.addDriver(new DriverD("Романов Р.Р.", true, 15));
+        bus1.addMechanics(petr);
+        bus1.addSponsor(sponsor1, sponsor2);;
 
-        DriverB driverB = new DriverB("Иванов И.И.", true, 5);
-        DriverC driverC = new DriverC("Петров П.П.", true, 10);
-        DriverD driverD = new DriverD("Романов Р.Р.", true, 15);
+        ServiceStation serviceStation = new ServiceStation();
+        serviceStation.addCar(car1);
+        serviceStation.addTruck(truck1);
+        serviceStation.service();
+        serviceStation.service();
 
-//        driverB.startMoving(car1);
-//        driverB.stopMoving(car1);
-//        driverB.tuckIn(car1);
-//
-//        driverC.startMoving(truck2);
-//        driverC.stopMoving(truck2);
-//        driverC.tuckIn(truck2);
-//
-//        driverD.startMoving(bus4);
-//        driverD.stopMoving(bus4);
-//        driverD.tuckIn(bus4);
+        List<Car> cars = List.of(car1, truck1, bus1);
 
-//        car1.printType();
-//        car2.printType();
-//        car3.printType();
-//        car4.printType();
+        for (Car car : cars) {
+            printInfo(car);
+        }
 
-//        truck1.printType();
-//        truck2.printType();
-//        truck3.printType();
-//        truck4.printType();
 
-//        bus1.printType();
-//        bus2.printType();
-//        bus3.printType();
-//        bus4.printType();
 
-        service(car1, car2, car3, car4, truck1, truck2, truck3, truck4, bus1, bus2, bus3, bus4);
+    }
+
+    private static void printInfo(Car car) {
+        System.out.println("Инфо по авто " + car.getBrand() + " " + car.getModel());
+        System.out.println("Водители: ");
+        for (Driver<?> driver : car.getDrivers()) {
+            System.out.println(driver.getFullName());
+        }
+        System.out.println("Механики: ");
+        for (Mechanic<?> mechanic : car.getMechanics()) {
+            System.out.println(mechanic.getName() + " " + mechanic.getSurname());
+        }
+        System.out.println("Спонсоры: ");
+        for (Sponsor sponsor : car.getSponsors()) {
+            System.out.println(sponsor.getName());
+        }
+        System.out.println();
     }
 
     private static void service(Car... cars) {

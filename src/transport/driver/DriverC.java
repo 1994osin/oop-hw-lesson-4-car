@@ -1,4 +1,4 @@
-package driver;
+package transport.driver;
 
 import transport.Truck;
 
